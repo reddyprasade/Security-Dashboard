@@ -25,10 +25,10 @@ def etl(table_name):
            table_name: We have to Pass the Table Name to fetech from DB
    """
    try:
-       bomandb = mysql.connector.connect(host='boman-db.mysql.database.azure.com',
+       bomandb = mysql.connector.connect(host='host_name',
                                 database='boman_dev',
-                                user='bomanadmin@boman-db',
-                                password='W$&c614isb#kLlFyJJ9gAE8WGH*!$$$boo')
+                                user='bomanadmin',
+                                password='password')
        # SELECT * FROM boman_dev.sast_results where tool_name='Bandit';
        sast_data = "SELECT * FROM boman_dev.{};".format(table_name) # I ahve to pass either sast_results or dast_results
        data = pd.read_sql(sast_data,bomandb)
@@ -51,10 +51,10 @@ def data_featching_from_db(table_name,tn):
            table_name: We have to Pass the Table Name to fetech from DB
    """
    try:
-       bomandb = mysql.connector.connect(host='boman-db.mysql.database.azure.com',
+       bomandb = mysql.connector.connect(host='hostname',
                                 database='boman_dev',
-                                user='bomanadmin@boman-db',
-                                password='W$&c614isb#kLlFyJJ9gAE8WGH*!$$$boo')
+                                user='bomanadmin',
+                                password='password')
        # SELECT * FROM boman_dev.sast_results where tool_name='Bandit';
        sast_data = "SELECT * FROM boman_dev.{} WHERE tool_name='{}';".format(table_name,tn) # I ahve to pass either sast_results or dast_results
        data = pd.read_sql(sast_data,bomandb)
