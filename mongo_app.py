@@ -160,12 +160,12 @@ sidebar = html.Div(
         #html.Img(src = 'https://static.wixstatic.com/media/a3de5f_9a5db212e88d49a891fa21f99c863d6c~mv2.png/v1/fill/w_381,h_206,al_c,usm_0.66_1.00_0.01,enc_auto/a3de5f_9a5db212e88d49a891fa21f99c863d6c~mv2.png'),
         html.Hr(),
         html.P(
-            "DevOpsSec Application Security powered by AI/ML", className="lead"
+            "AppSec Dashboard power by @Sumeru Software Solutions Pvt Ltd", className="lead"
         ),
         dbc.Nav(
             [
                 #dbc.NavLink("Home", href="www.boman.ai", active="exact"),
-                dbc.NavLink("Home", href="/dashboard", active="exact"),
+                dbc.NavLink("Home", href="/", active="exact"),
                 dbc.DropdownMenu(
                         label="Tools Dashboard",
                         nav=True,
@@ -204,7 +204,7 @@ app.layout = html.Div([
 )
 
 def render_page_content(pathname):
-    if pathname == "/dashboard":
+    if pathname == "/":
         # ToKen Count
         # select count(1) from boman_dev.sast_results;(SQL)
         sast_count = sast_result.scan_token.count()   
@@ -274,15 +274,15 @@ def render_page_content(pathname):
 
         tool_master_data=[      html.H1('Boman.ai Analysis Dashboard',style={'textAlign':'center'}),
                                 # Over all Scan Tools
-                                
-                                html.P("Overall Application and User Security Tools: "),
-                                html.Li("This are the Top Used Security Scaners by the Customers"),
+                                html.Hr(),
+                                html.H5("Overall Application and Customer Used Security Tools:",style={'font-weight': 'bold'}),
+                                html.Li("This are the Top Used Security Scaners by the Customers",style={'font-style': 'italic'}),
                                 html.Li('Total Number of Scan Done across all the Security Scanning Tools: {}'.format(total_scan_count)),
                                 #html.Hr,html.Br,
-                                html.Li("Total Scan done in SAST is :...............  {}".format(sast_count)),
-                                html.Li("Total Scan done in DAST is :...............  {}".format(dast_count)),
-                                html.Li("Total Scan done in SCA is :................  {}".format(sca_count)),
-                                html.Li("Total Scan Done in Secret Scan is :......  {}".format(sc_count)),
+                                html.Li("Total Scan done in SAST is : ...............  {}".format(sast_count)),
+                                html.Li("Total Scan done in DAST is : ...............  {}".format(dast_count)),
+                                html.Li("Total Scan done in SCA is : ................  {}".format(sca_count)),
+                                html.Li("Total Scan Done in Secret Scan is : ......  {}".format(sc_count)),
                                 html.Br(),
                                 # Total Overall Security Scan Count 
                                 dcc.Graph(id='Security_Scanning_Tools_bar',
@@ -296,10 +296,10 @@ def render_page_content(pathname):
                                         config= {'displaylogo': False}
                                 ),
                                 # SAST Scan Tools
-                                html.Li("Scan Tools Name is  :- {}:- Count:- {}".format(sast_tool_name_count['Tool Name'][0],sast_tool_name_count['Tool Count'][0])),
-                                html.Li("Scan Tool Name is :- {}  Count:- {}".format(sast_tool_name_count['Tool Name'][1],sast_tool_name_count['Tool Count'][1])),
-                                html.Li("Scan Tool Name is :- {}  Count:- {}".format(sast_tool_name_count['Tool Name'][2],sast_tool_name_count['Tool Count'][2])),
-                                html.Li("Scan Tool Name is :- {}  Count:- {}".format(sast_tool_name_count['Tool Name'][3],sast_tool_name_count['Tool Count'][3])),
+                                html.Li("{} Tools and it's Count:- {}".format(sast_tool_name_count['Tool Name'][0],sast_tool_name_count['Tool Count'][0]),style={'font-weight': 'bold'}),
+                                html.Li("{} Tool and it's Count:- {}".format(sast_tool_name_count['Tool Name'][1],sast_tool_name_count['Tool Count'][1]),style={'font-weight': 'bold'}),
+                                html.Li("{} Tool and it's Count:- {}".format(sast_tool_name_count['Tool Name'][2],sast_tool_name_count['Tool Count'][2]),style={'font-weight': 'bold'}),
+                                html.Li("{} Tool and it's Count:- {}".format(sast_tool_name_count['Tool Name'][3],sast_tool_name_count['Tool Count'][3]),style={'font-weight': 'bold'}),
 
                                 dcc.Graph(id ='Tool_name_barchart',
                                         figure= px.bar(sast_tool_name_count, y='Tool Name',x='Tool Count',
@@ -309,10 +309,10 @@ def render_page_content(pathname):
                                         config= {'displaylogo': False}
                                 ),
                                 # DAST Scan Tools
-                                html.Li("Scan Tools Name is  :- {}:- Count:- {}".format(dast_tool_name_count['Tool Name'][0],dast_tool_name_count['Tool Count'][0])),
-                                html.Li("Scan Tool Name is :- {}  Count:- {}".format(dast_tool_name_count['Tool Name'][1],dast_tool_name_count['Tool Count'][1])),
-                                html.Li("Scan Tool Name is :- {}  Count:- {}".format(dast_tool_name_count['Tool Name'][2],dast_tool_name_count['Tool Count'][2])),
-                                #html.Li("Scan Tool Name is :- {}  Count:- {}".format(dast_tool_name_count['Tool Name'][3],dast_tool_name_count['Tool Count'][3])),
+                                html.Li("{} Tools and it's Count:- {}".format(dast_tool_name_count['Tool Name'][0],dast_tool_name_count['Tool Count'][0]),style={'font-weight': 'bold'}),
+                                html.Li("{} Tool and  it's Count:- {}".format(dast_tool_name_count['Tool Name'][1],dast_tool_name_count['Tool Count'][1]),style={'font-weight': 'bold'}),
+                                html.Li("{} Tool and it's Count:- {}".format(dast_tool_name_count['Tool Name'][2],dast_tool_name_count['Tool Count'][2]),style={'font-weight': 'bold'}),
+                                #html.Li("Scan Tool Name is :- {}  Count:- {}".format(dast_tool_name_count['Tool Name'][3],dast_tool_name_count['Tool Count'][3]),style={'font-weight': 'bold'}),
                                 dcc.Graph(id ='Tool_name_barchart',
                                         figure= px.pie(dast_tool_name_count, names='Tool Name',values='Tool Count',
                                                 #text_auto='.2s',
@@ -324,9 +324,9 @@ def render_page_content(pathname):
                                         config= {'displaylogo': False}
                                 ),
                                 # SCA Scan Tools 
-                                html.Li("Scan Tools Name is  :- {}:- Count:- {}".format(sca_tool_name_count['Tool Name'][0],sca_tool_name_count['Tool Count'][0])),
-                                html.Li("Scan Tool Name is :- {}  Count:- {}".format(dast_tool_name_count['Tool Name'][1],dast_tool_name_count['Tool Count'][1])),
-                                html.Li("Scan Tool Name is :- {}  Count:- {}".format(dast_tool_name_count['Tool Name'][2],dast_tool_name_count['Tool Count'][2])),
+                                html.Li("{} Tools and it's Count:- {}".format(sca_tool_name_count['Tool Name'][0],sca_tool_name_count['Tool Count'][0]),style={'font-weight': 'bold'}),
+                                html.Li("{} Tool and it's Count:- {}".format(dast_tool_name_count['Tool Name'][1],dast_tool_name_count['Tool Count'][1]),style={'font-weight': 'bold'}),
+                                html.Li("{} Tool and it's Count:- {}".format(dast_tool_name_count['Tool Name'][2],dast_tool_name_count['Tool Count'][2]),style={'font-weight': 'bold'}),
                                 #html.Li("Scan Tool Name is :- {}  Count:- {}".format(dast_tool_name_count['Tool Name'][3],dast_tool_name_count['Tool Count'][3])),
 
                                 dcc.Graph(id = "customer_master_barchart",
@@ -341,7 +341,7 @@ def render_page_content(pathname):
                                         config= {'displaylogo': False}
                                 ),
                                 # SC Scan Tools 
-                                html.Li("Scan Tools Name is  :- {}:- Count:- {}".format(sc_tool_names_count['Tool Name'][0],sc_tool_names_count['Tool Count'][0])),
+                                html.Li("Scan Tools Name is  :- {}:- Count:- {}".format(sc_tool_names_count['Tool Name'][0],sc_tool_names_count['Tool Count'][0]),style={'font-weight': 'bold'}),
                                 dcc.Graph(id = "sc",
                                         figure= px.pie(sc_tool_names_count, 
                                         names = 'Tool Name',
@@ -354,9 +354,9 @@ def render_page_content(pathname):
                                         config= {'displaylogo': False}
                                 ),
                                 html.H4('Total Vulnerabilities from both SAST & DAST Predicate by Machine Learning Model'),
-                                html.Li('Total No Of Results Processed by AI/ML API is:- {}'.format(sum(total_false_postive['Count False Postive']))),
-                                html.Li("Total No of False Postive Deteeced by AI/ML API:- {}".format(total_false_postive['Count False Postive'][0])),
-                                html.Li("Total No of True Postive Deteeced by AI/ML API:- {}".format(total_false_postive['Count False Postive'][1])),
+                                html.Li('Total No Of Results Processed by AI/ML API is:- {}'.format(sum(total_false_postive['Count False Postive'])),style={'font-weight': 'bold'}),
+                                html.Li("Total No of False Postive Detected by AI/ML API:- {}".format(total_false_postive['Count False Postive'][0]),style={'font-weight': 'bold'}),
+                                html.Li("Total No of True Postive Detected by AI/ML API:- {}".format(total_false_postive['Count False Postive'][1]),style={'font-weight': 'bold'}),
                                 dcc.Graph(id='false_postive_bar',
                                         # false positive vulnerability in  application (1)      
                                         # false nagative no vulnerability in application (0)
@@ -381,15 +381,18 @@ def render_page_content(pathname):
                                                         title='Top Occurances of Vulnerabilities across All the applications'),
                                         config= {'displaylogo': False},
                                         ),
+
                                 # Over all Repeated Tool with Vulnerabilities Names with Severity
                                 dcc.Graph(id='Overall_Repeated_Vulnerabilities_Severity',                                        
-                                figure= px.parallel_categories(df_overall.head(150), 
+                                figure= px.parallel_categories(df_overall.head(170), 
                                                         title = 'Total Repeated Vulnerabilities Names with Severity Level',
                                                         labels = {'tool_type':'Tool Type','tool_name':'Tool Names','boman_severity':'Severity','vuln_name':'Vulnerability Names'},
                                                         color_continuous_scale = px.colors.diverging.balance,
                                                         ),
                                         config= {'displaylogo': False},
                                         ),
+
+
                                 # SAST 
                                 dcc.Graph(id='Sast_vuln_names',
                                         figure= px.pie(sast_vuln_name_count, names='Vulnerabilities Names',
@@ -490,9 +493,9 @@ def render_page_content(pathname):
 
         bandit = [html.H1("Bandit live data visualizationsis"),
                 html.Li("Total No of Scan Done So far: {}".format(bandit_no_of_scan)),
-                html.Li("Vulnerabilities Name:- {}  Vulnerabilities Count:- {}".format(bandit_vuln_name_count['Vulnerabilities Name'][0],bandit_vuln_name_count['Tool Count'][0])),
-                html.Li("Vulnerabilities Name:- {} Vulnerabilities Count:- {}".format(bandit_vuln_name_count['Vulnerabilities Name'][1],bandit_vuln_name_count['Tool Count'][1])),
-                html.Li("Vulnerabilities Name:- {} Vulnerabilities Count:- {}".format(bandit_vuln_name_count['Vulnerabilities Name'][2],bandit_vuln_name_count['Tool Count'][2])),
+                html.Li("Vulnerabilities Name:- {}  Vulnerabilities Count:- {}".format(bandit_vuln_name_count['Vulnerabilities Name'][0],bandit_vuln_name_count['Tool Count'][0]),style={'font-weight': 'bold'}),
+                html.Li("Vulnerabilities Name:- {} Vulnerabilities Count:- {}".format(bandit_vuln_name_count['Vulnerabilities Name'][1],bandit_vuln_name_count['Tool Count'][1]),style={'font-weight': 'bold'}),
+                html.Li("Vulnerabilities Name:- {} Vulnerabilities Count:- {}".format(bandit_vuln_name_count['Vulnerabilities Name'][2],bandit_vuln_name_count['Tool Count'][2]),style={'font-weight': 'bold'}),
                 # Vulnerabilities Names and it Count
                 dcc.Graph(id='vuln_name_bar',
                         figure= px.pie(bandit_vuln_name_count,
@@ -515,9 +518,9 @@ def render_page_content(pathname):
                 #        }),
 
                 # Bandit Vulnerabilities Severity
-                html.Li("Vulnerabilities Severity:- {}  Count:- {}".format(bandit_vuln_severity_count['Vulnerabilities Severity'][0],bandit_vuln_severity_count['Vulnerabilities Count'][0])),
-                html.Li("Vulnerabilities Severity:- {}  Count:- {}".format(bandit_vuln_severity_count['Vulnerabilities Severity'][1],bandit_vuln_severity_count['Vulnerabilities Count'][1])),
-                html.Li("Vulnerabilities Severity:- {}  Count:- {}".format(bandit_vuln_severity_count['Vulnerabilities Severity'][2],bandit_vuln_severity_count['Vulnerabilities Count'][2])),
+                html.Li("Vulnerabilities Severity:- {}  Count:- {}".format(bandit_vuln_severity_count['Vulnerabilities Severity'][0],bandit_vuln_severity_count['Vulnerabilities Count'][0]),style={'font-weight': 'bold'}),
+                html.Li("Vulnerabilities Severity:- {}  Count:- {}".format(bandit_vuln_severity_count['Vulnerabilities Severity'][1],bandit_vuln_severity_count['Vulnerabilities Count'][1]),style={'font-weight': 'bold'}),
+                html.Li("Vulnerabilities Severity:- {}  Count:- {}".format(bandit_vuln_severity_count['Vulnerabilities Severity'][2],bandit_vuln_severity_count['Vulnerabilities Count'][2]),style={'font-weight': 'bold'}),
                 
                 dcc.Graph(id='vuln_severity_graph',
                          figure=px.bar(bandit_vuln_severity_count, 
@@ -527,9 +530,9 @@ def render_page_content(pathname):
                          ),
 
                 # Bandit Vulnerabilities Confidence
-                html.Li("Vulnerabilities Confidence:- {}  Count:- {}".format(bandit_vuln_confidence_count['Vulnerabilities Confidence'][0],bandit_vuln_confidence_count['Vulnerabilities Count'][0])),
-                html.Li("Vulnerabilities Confidence:- {}  Count:- {}".format(bandit_vuln_confidence_count['Vulnerabilities Confidence'][1],bandit_vuln_confidence_count['Vulnerabilities Count'][1])),
-                html.Li("Vulnerabilities Confidence:- {}  Count:- {}".format(bandit_vuln_confidence_count['Vulnerabilities Confidence'][2],bandit_vuln_confidence_count['Vulnerabilities Count'][2])),
+                html.Li("Vulnerabilities Confidence:- {}  Count:- {}".format(bandit_vuln_confidence_count['Vulnerabilities Confidence'][0],bandit_vuln_confidence_count['Vulnerabilities Count'][0]),style={'font-weight': 'bold'}),
+                html.Li("Vulnerabilities Confidence:- {}  Count:- {}".format(bandit_vuln_confidence_count['Vulnerabilities Confidence'][1],bandit_vuln_confidence_count['Vulnerabilities Count'][1]),style={'font-weight': 'bold'}),
+                html.Li("Vulnerabilities Confidence:- {}  Count:- {}".format(bandit_vuln_confidence_count['Vulnerabilities Confidence'][2],bandit_vuln_confidence_count['Vulnerabilities Count'][2]),style={'font-weight': 'bold'}),
                 dcc.Graph(id = "vuln_severity_barchart",
                          figure=px.bar(bandit_vuln_confidence_count, 
                                         x='Vulnerabilities Confidence',
@@ -538,9 +541,9 @@ def render_page_content(pathname):
                                         title='Vulnerabilities Severity In Bandit'),config= {'displaylogo': False}
                         ),
                 # Total No False Positive and Nagative
-                html.H4("Total No Result Processed by Bandit Machine Learning Model API is:- {}".format(sum(bandit_false_postive_count['False Positive Count']))),
-                html.Li("True Positive is : {} :-  Count:- {}".format(bandit_false_postive_count['False Positive'][0],bandit_false_postive_count['False Positive Count'][0])),
-                html.Li("False Postive is : {} :-   Count:- {}".format(bandit_false_postive_count['False Positive'][1],bandit_false_postive_count['False Positive Count'][1])),
+                html.H4("Total No Result Processed by Bandit Machine Learning Model API is:- {}".format(sum(bandit_false_postive_count['False Positive Count'])),style={'font-weight': 'bold'}),
+                html.Li("True Positive is : {} :-  Count:- {}".format(bandit_false_postive_count['False Positive'][0],bandit_false_postive_count['False Positive Count'][0]),style={'font-weight': 'bold'}),
+                html.Li("False Postive is : {} :-   Count:- {}".format(bandit_false_postive_count['False Positive'][1],bandit_false_postive_count['False Positive Count'][1]),style={'font-weight': 'bold'}),
                 dcc.Graph(id = "false_positive_barchart",
                          figure=px.pie(bandit_false_postive_count, 
                                 names = 'False Positive',
@@ -959,7 +962,7 @@ def render_page_content(pathname):
         #by_day.index = pd.PeriodIndex(by_day.index)
         by_day = by_day.rename_axis('Days').reset_index(name='counts')
         
-        sast_df = sast_result[['tool_type','tool_name','boman_severity','vuln_name']].head(100)
+        sast_df = sast_result[['tool_type','tool_name','boman_severity','vuln_name']].head(200)
 
         trands_plot = [ 
                 html.H2('Live Static Application Security Testing (SAST)  Trend Analysis',style={'textAlign':'center'}),
@@ -982,7 +985,7 @@ def render_page_content(pathname):
                                 y=by_quarter['counts'],
                                 markers= True,
                                 title = 'SAST Quarterly Issues Created',
-                                labels = {'x':'Quarterly Issues','y':'Vulnerabilities Count'},
+                                labels = {'x':'Quarterly Issues','y':'No of Issues Count'},
                                 color_discrete_sequence=px.colors.sequential.Cividis)
                         ),
                 #html.H4("SAST Monthly Issues Created"),
@@ -992,7 +995,7 @@ def render_page_content(pathname):
                                 y=by_month['counts'],
                                 markers= True,
                                 title = 'SAST Monthly Issues Created',
-                                labels = {'x':'Monthly Issues','y':'Vulnerabilities Count'},
+                                labels = {'x':'Monthly Issues','y':'No of Issues Count'},
                                 color_discrete_sequence=px.colors.sequential.Magenta)
                         ),
                 #html.H4("SAST Weekly Issues Created"),
@@ -1002,7 +1005,7 @@ def render_page_content(pathname):
                                 y=by_weak['counts'],
                                 markers= True,
                                 title = 'SAST Weekly Issues Created',
-                                labels = {'x':'Weekly Issues','y':'Vulnerabilities Count'},
+                                labels = {'x':'Weekly Issues','y':'No of Issues Count'},
                                 color_discrete_sequence=px.colors.sequential.Electric),
                         ),
                 #html.H4("SAST Daily Issues Created"),
@@ -1012,7 +1015,7 @@ def render_page_content(pathname):
                                         x='Days',
                                         y='counts',
                                         title = "SAST Daily Issues Created",
-                                        labels = {'Days':'Daily Issues','counts':'Vulnerabilities Count'},
+                                        labels = {'Days':'Daily Issues','counts':'No of Issues Count'},
                                         color_discrete_sequence= px.colors.sequential.Bluered)),
                 # SAST Repeated Vulnerabilities across applications with Severity
                   dcc.Graph(id='correlation_flow',
@@ -1072,7 +1075,7 @@ def render_page_content(pathname):
                 y=by_quarter['counts'],
                 markers= True,
                 title = 'DAST Quarterly Issues Created',
-                labels = {'x':'Quarterly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Quarterly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Cividis)
         ),
         
@@ -1082,7 +1085,7 @@ def render_page_content(pathname):
                 y=by_month['counts'],
                 markers= True,
                 title = 'DAST Monthly Issues Created',
-                labels = {'x':'Monthly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Monthly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Magenta)
         ),
         
@@ -1092,7 +1095,7 @@ def render_page_content(pathname):
                 y=by_weak['counts'],
                 markers= True,
                 title = 'DAST Weekly Issues Created',
-                labels = {'x':'Weekly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Weekly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Electric),
         ),
         
@@ -1102,7 +1105,7 @@ def render_page_content(pathname):
                         x='Days',
                         y='counts',
                         title = "DAST Daily Issues Created",
-                        labels = {'Days':'Daily Issues','counts':'Vulnerabilities Count'},
+                        labels = {'Days':'Daily Issues','counts':'No of Issues Count'},
                         color_discrete_sequence= px.colors.sequential.Bluered)),
         dcc.Graph(id='correlation_flow',
         config={'displaylogo':False},
@@ -1160,7 +1163,7 @@ def render_page_content(pathname):
                 y=by_quarter['counts'],
                 markers= True,
                 title = 'SCA Quarterly Issues Created',
-                labels = {'x':'Quarterly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Quarterly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Cividis)
         ),
         
@@ -1170,7 +1173,7 @@ def render_page_content(pathname):
                 y=by_month['counts'],
                 markers= True,
                 title = 'SCA Monthly Issues Created',
-                labels = {'x':'Monthly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Monthly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Magenta)
         ),
         
@@ -1180,7 +1183,7 @@ def render_page_content(pathname):
                 y=by_weak['counts'],
                 markers= True,
                 title = 'SCA Weekly Issues Created',
-                labels = {'x':'Weekly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Weekly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Electric),
         ),
         dcc.Graph(id='daily_count',
@@ -1189,7 +1192,7 @@ def render_page_content(pathname):
                         x='Days',
                         y='counts',
                         title = "SCA Daily Issues Created",
-                        labels = {'Days':'Daily Issues','counts':'Vulnerabilities Count'},
+                        labels = {'Days':'Daily Issues','counts':'No of Issues Count'},
                         color_discrete_sequence= px.colors.sequential.Bluered)),
         dcc.Graph(id='correlation_flow',
         config={'displaylogo':False},
@@ -1248,7 +1251,7 @@ def render_page_content(pathname):
                 y=by_quarter['counts'],
                 markers= True,
                 title = 'Secret Scanner Quarterly Issues Created',
-                labels = {'x':'Quarterly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Quarterly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Cividis)
         ),
         
@@ -1258,7 +1261,7 @@ def render_page_content(pathname):
                 y=by_month['counts'], # Change to NO of Vuln
                 markers= True,
                 title = 'Secret Scanner Monthly Issues Created',
-                labels = {'x':'Monthly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Monthly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Magenta)
         ),
         
@@ -1268,7 +1271,7 @@ def render_page_content(pathname):
                 y=by_weak['counts'],
                 markers= True,
                 title = 'Secret Scanner Weekly Issues Created',
-                labels = {'x':'Weekly Issues','y':'Vulnerabilities Count'},
+                labels = {'x':'Weekly Issues','y':'No of Issues Count'},
                 color_discrete_sequence=px.colors.sequential.Electric),
         ),
         
@@ -1278,7 +1281,7 @@ def render_page_content(pathname):
                         x='Days',
                         y='counts',
                         title = "Secret Scanner Daily Issues Created",
-                        labels = {'Days':'Daily Issues','counts':'Vulnerabilities Count'},
+                        labels = {'Days':'Daily Issues','counts':'No of Issues Count'},
                         color_discrete_sequence= px.colors.sequential.Bluered)),
         
         dcc.Graph(id='correlation_flow',
